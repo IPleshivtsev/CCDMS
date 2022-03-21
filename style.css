@@ -132,6 +132,6 @@ button img {
     transform: rotate(180deg);
 }
 
-.sortHide {
+.sortHide, .hide {
     display: none;
 }
