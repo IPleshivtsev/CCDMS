@@ -65,6 +65,7 @@ th, td[name="id"] {
 th {
     cursor: pointer;
     padding: 0px 20px 8px 20px !important;
+    user-select: none;
 }
 
 td, td button {
@@ -124,7 +125,7 @@ button img {
     color: #9873FF;
 }
 
-.sortAsc, .sortDesc {
+.sortAsc, .sortDesc, .sortFio {
     display: initial;
 }
 
