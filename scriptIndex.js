@@ -1,10 +1,52 @@
 (function script() {
+    let filter = {
+        searchString: '',
+        column: 'id',
+        sortType: 'asc'
+    };
+    let clients;
     let clientsTable;
     let tr;
     let td;
     let button;
     let img;
     let ths;
+
+    function applyFilter() {
+        const isAsc = filter.sortType === 'asc' ? true : false;
+        switch(filter.column) {
+            case 'id':
+            case 'createdDatetime':
+            case 'changedDatetime':
+                clients.sort(function (a, b) {
+                    let aValue = filter.column === 'id' ? a.id 
+                        : new Date(filter.column === 'createdAt' 
+                            ? a.createdAt : a.updatedAt);
+                    let bValue = filter.column === 'id' ? b.id 
+                        : new Date(filter.column === 'createdAt' 
+                            ? b.createdAt : b.updatedAt);
+                    return isAsc ? bValue - aValue 
+                        : aValue - bValue;
+                });
+                break;
+            case 'fio':
+                clients.sort(function (a, b) {
+                    let nameA = `${a.surname} ${a.name} ${a.lastName}`.toLowerCase();
+                    let nameB = `${b.surname} ${b.name} ${b.lastName}`.toLowerCase();
+                    return nameA < nameB ? (isAsc ? -1 : 1) 
+                        : nameA > nameB ? (isAsc ? 1 : -1) 
+                        : 0;
+                    })
+                break;
+            default:
+                break;
+        }
+        let filteredClients = clients.filter(item => item.id.indexOf(filter.searchString) !== -1 
+            || `${item.surname} ${item.name} ${item.lastName}`.toLowerCase().indexOf(filter.searchString) !== -1
+            || item.createdAt.indexOf(filter.searchString) !== -1
+            || item.updatedAt.indexOf(filter.searchString) !== -1);
+        fillClients(filteredClients);
+    }
 
     function createContactIcon(src, type, value = '') {
         img = document.createElement('img');
@@ -121,9 +163,11 @@
     }
 
     function fillClients(clients) {
+        clientsTable.querySelector('tBody').innerHTML = '';
         for (const client of clients) {
             addClientToTable(client);
         }
+        initializeTooltips();
     }
 
     async function getClients() {
@@ -161,27 +205,35 @@
                 };
                 e.currentTarget.className = 'sort';
                 sortType = sortType === 'sortAsc' ? 'sortDesc' : 'sortAsc';
+                filter.sortType = sortType === 'sortAsc' ? 'desc' : 'asc';
+                
                 if (imgEl.length > 1) {
                     imgEl[sortType === 'sortAsc' ? 1 : 0].className = 'sortFio';
+                    filter.column = 'fio';
                 } else {
                     imgEl[0].className = sortType;
-                }                
+                    filter.column = imgEl[0].parentElement.getAttribute('name');
+                }
+                applyFilter();
             });
         }        
-        // отсортировать таблицу        
     }
     
     async function initialization() {
         clientsTable = document.querySelector('#clientsTable');
 
-        const clients = await getClients();
+        clients = await getClients();
         if (clients.length !== 0) {
           fillClients(clients);          
         } else {
           //"Клиенты отсутствуют";
         }
-        initializeTooltips();
         initializeSort();
+
+        document.querySelector('#searchInput').addEventListener('input', function(e) {
+            filter.searchString = e.currentTarget.value.toLowerCase();
+            applyFilter();
+        })
     }
 
     document.addEventListener('DOMContentLoaded', initialization);
