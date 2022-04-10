@@ -52,6 +52,7 @@ tbody {
 tbody tr {
     background: #FFFFFF;
     border-radius: 0px;
+    vertical-align: middle;
 }
 
 th, td[name="id"] {
@@ -78,6 +79,7 @@ td, td button {
 
 td {
     padding: 20px !important;
+    height: 81px;
 }
 
 td p {
@@ -94,31 +96,23 @@ td button {
     background-color: #FFFFFF;
 }
 
-button img {
+button svg {
     vertical-align: bottom;
 }
 
 #addClientButton {
     align-items: center;
-    padding: 12.5px 26.5px;
     width: 216px;
-    height: 44px;
-    border: 1px solid #9873FF;
-    box-sizing: border-box;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 19px;
-    text-align: center;
-    color: #9873FF;
-    background-color: transparent;
-    margin: auto;
     display: flex;
     flex-direction: row;
     margin-top: 40px;
 }
 
-#addClientButton img {
-    margin-right: 10px;
+#saveButton {
+    align-items: center;
+    width: 147px;
+    flex-direction: row;
+    margin-top: 40px;
 }
 
 .sort {
@@ -135,4 +129,133 @@ button img {
 
 .sortHide, .hide {
     display: none;
+}
+
+.mandatory-symb {
+    color: #9873FF;
+    font-size: 20px;
+    vertical-align: middle;
+}
+
+/* Buttons */
+.primary-btn, .secondary-btn {
+    height: 44px;
+    padding: 12.5px 26.5px;
+    border: 1px solid #9873FF;
+    box-sizing: border-box;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 19px;
+    text-align: center;
+    margin: auto;
+}
+
+.primary-btn {    
+    color: #FFFFFF;
+    background-color: #9873FF;
+}
+
+.secondary-btn {
+    color: #9873FF;
+    background-color: transparent;
+}
+
+.primary-btn svg, .secondary-btn svg {
+    margin-right: 10px;
+}
+
+.primary-btn svg {    
+    fill: #FFFFFF;
+}
+
+.secondary-btn svg {
+    fill: #9873FF;
+}
+
+.primary-btn:hover, .secondary-btn:hover {
+    background-color: #B89EFF;
+    color: #FFFFFF;
+}
+
+.secondary-btn:hover {
+    border: 0px;
+}
+
+.primary-btn:active, .secondary-btn:active {
+    background-color: #8052FF;
+    color: #FFFFFF;
+}
+
+.secondary-btn:hover svg, .secondary-btn:active svg {
+    fill: #FFFFFF;
+}
+
+.primary-btn:disabled {
+    background-color: #C8C5D1;
+    border: 0px;
+}
+
+.secondary-btn:disabled {
+    border: 1px solid #C8C5D1;
+    background-color: transparent;
+    color: #C8C5D1;
+}
+
+.primary-btn:disabled svg {
+    pointer-events: none;
+}
+
+.secondary-btn:disabled svg {
+    pointer-events: none;
+    fill: #C8C5D1;
+}
+
+.simple-btn {
+    border: 0px;
+    background: transparent;
+    text-decoration: underline;
+}
+
+/* Модальные окна */
+.modal-content {
+    padding: 24px 30px 25px 30px;
+    border-radius: 0px;
+}
+
+.modal-header {
+    border-bottom: 0px;
+    padding: 0px 0px 20px 0px;
+}
+
+.modal-body {
+    padding: 0px;
+}
+
+.form-floating {
+    margin-bottom: 32px;
+}
+
+.modal-body input.form-control {
+    padding: 0px;
+    height: 40px;
+    border: 0px;
+    border-bottom: 1px solid #C8C5D1;
+    border-radius: 0px;
+    padding-left: 3px;
+}
+
+.modal-body input.form-control:focus {
+    box-shadow: 0 0 0 0;
+ }
+
+.modal-body label.form-label {
+    padding: 0px;
+    color: #B0B0B0;
+    padding-left: 0px;
+    padding-top: 10px;
+    transform-origin: 0 -30px;
+}
+
+.modal-footer {
+    display: contents;
 }

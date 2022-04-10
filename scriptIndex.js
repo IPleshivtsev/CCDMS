@@ -43,8 +43,8 @@
         }
         let filteredClients = clients.filter(item => item.id.indexOf(filter.searchString) !== -1 
             || `${item.surname} ${item.name} ${item.lastName}`.toLowerCase().indexOf(filter.searchString) !== -1
-            || item.createdAt.indexOf(filter.searchString) !== -1
-            || item.updatedAt.indexOf(filter.searchString) !== -1);
+            || new Date(item.createdAt).toLocaleString().replaceAll(',','').indexOf(filter.searchString) !== -1
+            || new Date(item.updatedAt).toLocaleString().replaceAll(',','').indexOf(filter.searchString) !== -1);
         fillClients(filteredClients);
     }
 
