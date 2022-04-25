@@ -112,7 +112,7 @@ button svg {
     align-items: center;
     width: 147px;
     flex-direction: row;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 .sort {
@@ -135,6 +135,106 @@ button svg {
     color: #9873FF;
     font-size: 20px;
     vertical-align: middle;
+}
+
+/* Contact form */
+
+#addContactsBlock {
+    margin: 0px -30px;
+    padding: 25px 0px;
+    background-color: rgba(200, 197, 209, 0.2);
+    text-align: center;
+}
+
+.contactElement {
+    width: 438px;
+    margin: 0px 30px;
+}
+
+.hide {
+    display: none;
+}
+
+.contactElement button.dropdownContactBtn,
+.contactElement button.dropdownContactBtn.show {
+    background-color: #E7E5EB;
+    border-radius: 0px;
+    width: 145px;
+    text-align: left;
+}
+
+.contactElement button.dropdownContactBtn::after {
+    display: none;
+}
+
+.contactElement button.dropdownContactBtn span {
+    float: left;
+}
+
+.contactElement button.dropdownContactBtn svg {
+    width: 11px;
+    height: 24px;
+    float: right;
+}
+
+.contactElement button.dropdownContactBtn.show svg {
+    transform: rotate(180deg);
+}
+
+.contactElement button.deleteContactBtn {
+    background-color: #E7E5EB;
+    border: 1px solid #C8C5D1;
+    border-radius: 0px;
+    padding: 0px 6px;
+}
+
+.contactElement button.dropdownContactBtn,
+.contactElement button.dropdownContactBtn:focus {
+    color: #333333 !important;    
+    border: 1px solid #C8C5D1;
+}
+
+.contactElement button:hover,
+.contactElement button.dropdownContactBtn:focus {
+    background-color: #E7E5EB;
+}
+
+.contactElement button.dropdownContactBtn.show:focus {
+    border: 1px solid #C8C5D1;
+}
+
+.contactElement button.deleteContactBtn svg{
+    vertical-align: baseline;
+    fill: #B0B0B0;
+}
+
+.contactElement button.deleteContactBtn:hover {
+    border: 1px solid #F06A4D;
+}
+
+.contactElement button:focus,
+.contactElement button.dropdownContactBtn.show:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.contactElement button.deleteContactBtn:hover svg {
+    fill: #F06A4D;
+}
+
+.contactElement ul {
+    background-color: #F4F3F6;
+    padding: 0;
+    min-width: 145px;
+    transform: translate3d(0px, 38px, 0px) !important;
+    border-radius: 0px;
+}
+
+.contactElement ul li {
+    background-color: #F4F3F6;
+}
+
+.contactElement ul li:hover {
+    background-color: #E7E5EB;
 }
 
 /* Buttons */
@@ -160,7 +260,8 @@ button svg {
     background-color: transparent;
 }
 
-.primary-btn svg, .secondary-btn svg {
+.primary-btn svg,
+.secondary-btn svg {
     margin-right: 10px;
 }
 
@@ -213,7 +314,18 @@ button svg {
 .simple-btn {
     border: 0px;
     background: transparent;
+}
+
+.simple-btn svg {
+    vertical-align: middle;
+}
+
+.simple-btn.underlined {
     text-decoration: underline;
+}
+
+.simple-btn.bolded {
+    font-weight: 600;
 }
 
 /* Модальные окна */
@@ -235,7 +347,11 @@ button svg {
     margin-bottom: 32px;
 }
 
-.modal-body input.form-control {
+input.form-control {
+    font-weight: 600;
+}
+
+.modal-body .form-floating input.form-control {
     padding: 0px;
     height: 40px;
     border: 0px;
@@ -253,7 +369,7 @@ button svg {
     color: #B0B0B0;
     padding-left: 0px;
     padding-top: 10px;
-    transform-origin: 0 -30px;
+    transform-origin: 0 -80px;
 }
 
 .modal-footer {

@@ -57,10 +57,231 @@
                     <input class="form-control" id="patronymic" placeholder="Отчество">
                     <label for="patronymic" class="form-label">Отчество</label>
                 </div>
+                <div id="addContactsBlock">
+                <div id="contactElements">
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                  <div class="input-group mb-3 contactElement hide">
+                    <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <span class="contactType">Телефон</span>
+                      <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.494999 0.689971C0.249999 0.934971 0.249999 1.32997 0.494999 1.57497L4.65 5.72997C4.845 5.92497 5.16 5.92497 5.355 5.72997L9.51 1.57497C9.755 1.32997 9.755 0.93497 9.51 0.68997C9.265 0.44497 8.87 0.44497 8.625 0.68997L5 4.30997L1.375 0.684972C1.135 0.444972 0.734999 0.444971 0.494999 0.689971Z" fill="#9873FF"/>
+                      </svg>                        
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item">Телефон</a></li>
+                      <li><a class="dropdown-item">Email</a></li>
+                      <li><a class="dropdown-item">Facebook</a></li>
+                      <li><a class="dropdown-item">VK</a></li>
+                      <li><a class="dropdown-item">Другое</a></li>                     
+                    </ul>
+                    <input type="text" class="form-control">
+                    <button class="btn btn-outline-secondary deleteContactBtn" type="button" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-html="true" title="" data-bs-original-title="Удалить контакт" aria-label="Удалить контакт">
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="#B0B0B0" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M6 0C2.682 0 0 2.682 0 6C0 9.318 2.682 12 6 12C9.318 12 12 9.318 12 6C12 2.682 9.318 0 6 0ZM6 10.8C3.354 10.8 1.2 8.646 1.2 6C1.2 3.354 3.354 1.2 6 1.2C8.646 1.2 10.8 3.354 10.8 6C10.8 8.646 8.646 10.8 6 10.8ZM8.154 3L6 5.154L3.846 3L3 3.846L5.154 6L3 8.154L3.846 9L6 6.846L8.154 9L9 8.154L6.846 6L9 3.846L8.154 3Z"/>
+                      </svg>
+                    </button>
+                  </div>
+                </div>
+
+                <button id="addContactButton" class="simple-btn bolded">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.00001 4.66667C7.63334 4.66667 7.33334 4.96667 7.33334 5.33333V7.33333H5.33334C4.96668 7.33333 4.66668 7.63333 4.66668 8C4.66668 8.36667 4.96668 8.66667 5.33334 8.66667H7.33334V10.6667C7.33334 11.0333 7.63334 11.3333 8.00001 11.3333C8.36668 11.3333 8.66668 11.0333 8.66668 10.6667V8.66667H10.6667C11.0333 8.66667 11.3333 8.36667 11.3333 8C11.3333 7.63333 11.0333 7.33333 10.6667 7.33333H8.66668V5.33333C8.66668 4.96667 8.36668 4.66667 8.00001 4.66667ZM8.00001 1.33333C4.32001 1.33333 1.33334 4.32 1.33334 8C1.33334 11.68 4.32001 14.6667 8.00001 14.6667C11.68 14.6667 14.6667 11.68 14.6667 8C14.6667 4.32 11.68 1.33333 8.00001 1.33333ZM8.00001 13.3333C5.06001 13.3333 2.66668 10.94 2.66668 8C2.66668 5.06 5.06001 2.66667 8.00001 2.66667C10.94 2.66667 13.3333 5.06 13.3333 8C13.3333 10.94 10.94 13.3333 8.00001 13.3333Z" fill="#9873FF"/>
+                  </svg>                      
+                  Добавить контакт
+                </button>
+              </div>
             </div>
             <div class="modal-footer">
               <button id="saveButton" class="primary-btn">Сохранить</button>
-              <button id="cancelButton" class="simple-btn" data-bs-dismiss="modal">Отмена</button>
+              <button id="cancelButton" class="simple-btn underlined" data-bs-dismiss="modal">Отмена</button>
             </div>
           </div>
         </div>

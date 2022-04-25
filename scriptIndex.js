@@ -11,6 +11,16 @@
     let button;
     let img;
     let ths;
+    let addContactButton
+    let contactElement;
+
+    function checkAddContactBtn() {        
+        if (document.querySelectorAll('.contactElement.hide').length === 0) {
+            addContactButton.style.display = 'none';
+        } else {
+            addContactButton.style.display = 'inline-block';
+        }
+    }
 
     function applyFilter() {
         const isAsc = filter.sortType === 'asc' ? true : false;
@@ -221,7 +231,7 @@
     
     async function initialization() {
         clientsTable = document.querySelector('#clientsTable');
-
+        
         clients = await getClients();
         if (clients.length !== 0) {
           fillClients(clients);          
@@ -234,6 +244,36 @@
             filter.searchString = e.currentTarget.value.toLowerCase();
             applyFilter();
         })
+
+        let dropdownItems = document.querySelectorAll('a.dropdown-item');
+
+        for (let i = 0; i < dropdownItems.length; i++) {
+            dropdownItems[i].addEventListener('click', function(e) {
+                let parentElement = e.currentTarget.closest('.contactElement');
+                parentElement.querySelector('span.contactType').innerText = e.currentTarget.innerText;
+            })
+        }
+
+        addContactButton = document.querySelector('#addContactButton');
+        addContactButton.addEventListener('click', function(e) {
+            contactElement = document.querySelector('.contactElement.hide');
+            contactElement.classList.toggle('hide');
+            //document.querySelector('.contactElement.hide:last-of-type').after(contactElement);
+            document.querySelector('#contactElements').appendChild(contactElement);
+            checkAddContactBtn();
+        });
+
+        let deleteContactBtns = document.querySelectorAll('.deleteContactBtn');
+
+        for (let i = 0; i < deleteContactBtns.length; i++) {
+            deleteContactBtns[i].addEventListener('click', function(e) {
+                contactElement = e.currentTarget.parentElement;
+                contactElement.classList.toggle('hide');
+                contactElement.querySelector('.contactType').innerText = 'Телефон';
+                contactElement.querySelector('input').value = '';
+                checkAddContactBtn();               
+            })
+        }
     }
 
     document.addEventListener('DOMContentLoaded', initialization);
