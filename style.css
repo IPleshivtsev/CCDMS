@@ -108,7 +108,7 @@ button svg {
     margin-top: 40px;
 }
 
-#saveButton {
+#saveClientButton, #deleteClientButton {
     align-items: center;
     width: 147px;
     flex-direction: row;
@@ -349,6 +349,16 @@ button svg {
 
 input.form-control {
     font-weight: 600;
+}
+
+.modal-header h5 {
+    font-size: 18px;
+}
+
+.modal-header h5 span {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(176, 176, 176, 1);
 }
 
 .modal-body .form-floating input.form-control {

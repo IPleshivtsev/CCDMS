@@ -1,4 +1,5 @@
 (function script() {
+    let plannedDeleteClientId = '';
     let filter = {
         searchString: '',
         column: 'id',
@@ -82,9 +83,22 @@
         return img;
     }
 
-    function createButtonWithImage(name, src, innerHTML) {
+    function createButtonWithImage(name, src, innerHTML, attributes) {
         button = document.createElement('button');
         button.name = name;
+        for (const attribute of attributes) {
+            button.setAttribute(attribute.name, attribute.value);
+        }
+        if (name === 'deleteClientButton') {
+            button.addEventListener('click', function(e) {
+                plannedDeleteClientId = e.currentTarget.closest('tr').querySelector('td[name="id"]').innerText;
+            });
+        } else if (name === 'editClientButton') {
+            button.addEventListener('click', function(e) {
+                let clientId = e.currentTarget.closest('tr').querySelector('td[name="id"]').innerText;
+                document.querySelector('#clientModalLabel').innerHTML = `<b>Изменить данные </b><span>ID: ${clientId}</span>`;
+            })
+        }
         img = document.createElement('img');
         img.src = src;
         button.append(img);
@@ -150,8 +164,10 @@
         td.setAttribute('name', name);
 
         if (name === 'actions') {            
-            td.append(createButtonWithImage('editButton', './content/edit.svg', 'Изменить'));
-            td.append(createButtonWithImage('deleteButton', './content/cancel.svg', 'Удалить'));
+            td.append(createButtonWithImage('editClientButton', './content/edit.svg', 'Изменить',
+                [{name: 'data-bs-toggle', value: 'modal'}, {name: 'data-bs-target', value: '#clientModal'}]));
+            td.append(createButtonWithImage('deleteClientButton', './content/cancel.svg', 'Удалить',
+                [{name: 'data-bs-toggle', value: 'modal'}, {name: 'data-bs-target', value: '#deleteClientModal'}]));
         } else if (name === 'contacts') {
             td = fillContacts(td, contacts);
         } else {
@@ -180,10 +196,19 @@
         initializeTooltips();
     }
 
+    /* API */
     async function getClients() {
         const responce = await fetch(`http://localhost:3000/api/clients`);
         return await responce.json();
     }
+
+    async function deleteClient(id) {
+        const responce = await fetch(`http://localhost:3000/api/clients/${id}`, {
+            method: 'DELETE',
+          });
+        return await responce.json();
+    }
+    /* */
 
     function initializeTooltips() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -254,6 +279,10 @@
             })
         }
 
+        document.querySelector('#addClientButton').addEventListener('click', function(e) {
+            document.querySelector('#clientModalLabel').innerHTML = `<b>Добавить клиента</b>`;
+        });
+
         addContactButton = document.querySelector('#addContactButton');
         addContactButton.addEventListener('click', function(e) {
             contactElement = document.querySelector('.contactElement.hide');
@@ -272,8 +301,26 @@
                 contactElement.querySelector('.contactType').innerText = 'Телефон';
                 contactElement.querySelector('input').value = '';
                 checkAddContactBtn();               
-            })
+            });
         }
+
+        let cancelModalBtns = document.querySelectorAll('#cancelButton');
+
+        for (let i = 0; i < cancelModalBtns.length; i++) {
+            cancelModalBtns[i].addEventListener('click', function(e) {
+                plannedDeleteClientId = '';
+            });
+        }
+
+        document.querySelector('#deleteClientButton').addEventListener('click', async function (e) {
+            if (plannedDeleteClientId !== '') {
+                let ret = await deleteClient(plannedDeleteClientId);
+                if (ret) {
+                    clients = clients.filter( c => c.id !== plannedDeleteClientId );
+                    fillClients(clients);
+                }
+            }
+        });
     }
 
     document.addEventListener('DOMContentLoaded', initialization);
