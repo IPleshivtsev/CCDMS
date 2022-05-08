@@ -71,16 +71,17 @@
     function validateClientModal() {
         hasErrors = false;
         errorsBlock.innerHTML = '';
-        if (firstName_clientModal.value === '') {
-            addValidateError('Поле "Имя" обязательно для заполнения', firstName_clientModal);
-        } else if (firstName_clientModal.value.match(/\d/g) !== null) {
-            addValidateError('В поле "Имя" не может быть чисел', firstName_clientModal);
-        }
         
         if (secondName_clientModal.value === '') {
             addValidateError('Поле "Фамилия" обязательно для заполнения', secondName_clientModal);
         } else if (secondName_clientModal.value.match(/\d/g) !== null) {
             addValidateError('В поле "Фамилия" не может быть чисел', secondName_clientModal);
+        }
+
+        if (firstName_clientModal.value === '') {
+            addValidateError('Поле "Имя" обязательно для заполнения', firstName_clientModal);
+        } else if (firstName_clientModal.value.match(/\d/g) !== null) {
+            addValidateError('В поле "Имя" не может быть чисел', firstName_clientModal);
         }
 
         if (patronymic_clientModal.value.match(/\d/g) !== null) {
@@ -116,25 +117,25 @@
                 } else if (activeContactElementType === 'Телефон' && !isContactElementValid) {
                     isError = true;
                     if (!isErrorMsgOfWrongPhoneAdded) {
-                        errorMsg = 'Контакт с типом "Телефон" содержит некорректный номер телефона';
+                        errorMsg = 'Контакт "Телефон" содержит некорректный номер';
                         isErrorMsgOfWrongPhoneAdded = true;
                     }
                 } else if (activeContactElementType === 'Email' && !isContactElementValid) {
                     isError = true;
                     if (!isErrorMsgOfWrongEmailAdded) {
-                        errorMsg = 'Контакт с типом "Email" содержит некорректный адрес эл.почты';   
+                        errorMsg = 'Контакт "Email" содержит некорректный адрес';   
                         isErrorMsgOfWrongEmailAdded = true;         
                     }
                 } else if (activeContactElementType === 'Facebook' && !isContactElementValid) {                    
                     isError = true;
                     if (!isErrorMsgOfWrongFacebookUrlAdded) {
-                        errorMsg = 'Контакт с типом "Facebook" содержит некорректный адрес страницы';
+                        errorMsg = 'Контакт "Facebook" содержит некорректный адрес страницы';
                         isErrorMsgOfWrongFacebookUrlAdded = true;
                     }
                 } else if (activeContactElementType === 'VK' && !isContactElementValid) {                    
                     isError = true;
                     if (!isErrorMsgOfWrongVKUrlAdded) {
-                        errorMsg = 'Контакт с типом "VK" содержит некорректный адрес страницы';
+                        errorMsg = 'Контакт "VK" содержит некорректный адрес страницы';
                         isErrorMsgOfWrongVKUrlAdded = true;
                     }
                 }
