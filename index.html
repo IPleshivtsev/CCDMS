@@ -46,19 +46,19 @@
             </div>
             <div class="modal-body">        
                 <div class="form-floating">
-                    <input class="form-control" id="secondName" placeholder="Фамилия">
-                    <label for="secondName" class="form-label">Фамилия<span class="mandatory-symb">*</span></label>
+                    <input class="form-control" id="secondName_clientModal" placeholder="Фамилия">
+                    <label for="secondName_clientModal" class="form-label">Фамилия<span class="mandatory-symb">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="firstName" placeholder="Имя">
-                    <label for="firstName" class="form-label">Имя<span class="mandatory-symb">*</span></label>
+                    <input class="form-control" id="firstName_clientModal" placeholder="Имя">
+                    <label for="firstName_clientModal" class="form-label">Имя<span class="mandatory-symb">*</span></label>
                 </div>
                 <div class="form-floating">
-                    <input class="form-control" id="patronymic" placeholder="Отчество">
-                    <label for="patronymic" class="form-label">Отчество</label>
+                    <input class="form-control" id="patronymic_clientModal" placeholder="Отчество">
+                    <label for="patronymic_clientModal" class="form-label">Отчество</label>
                 </div>
                 <div id="addContactsBlock">
-                <div id="contactElements">
+                <div id="contactElementsBlock_clientModal">
                   <div class="input-group mb-3 contactElement hide">
                     <button class="btn btn-outline-secondary dropdown-toggle dropdownContactBtn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       <span class="contactType">Телефон</span>
@@ -280,6 +280,7 @@
               </div>
             </div>
             <div class="modal-footer">
+              <span id="errorsBlock">Ошибка: новая модель организационной деятельности предполагает независимые способы реализации поставленных обществом задач!</span>
               <button id="saveClientButton" class="primary-btn">Сохранить</button>
               <button id="cancelButton" class="simple-btn underlined" data-bs-dismiss="modal">Отмена</button>
             </div>

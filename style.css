@@ -115,6 +115,10 @@ button svg {
     margin-top: 25px;
 }
 
+#saveClientButton, #cancelButton, #editClientButton, #deleteClientButton {
+    cursor: pointer;
+}
+
 .sort {
     color: #9873FF;
 }
@@ -231,6 +235,7 @@ button svg {
 
 .contactElement ul li {
     background-color: #F4F3F6;
+    cursor: pointer;
 }
 
 .contactElement ul li:hover {
@@ -384,4 +389,25 @@ input.form-control {
 
 .modal-footer {
     display: contents;
+}
+
+.modal-footer.haveErrors #errorsBlock {
+    display: block;
+}
+
+.modal-footer.haveErrors #saveClientButton {
+    margin-top: 0px;
+}
+
+#errorsBlock {
+    display: none;
+    margin: 8px auto 9px auto;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(240, 106, 77, 1);
+    width: 255px;
+}
+
+.not-validate {
+    border-bottom: 1px solid rgba(240, 106, 77, 1) !important;
 }
