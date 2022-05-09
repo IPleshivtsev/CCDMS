@@ -29,20 +29,26 @@ body {
     box-sizing: border-box;
 }
 
-#bodyForm h2 {
+#bodyForm {
     margin-left: 90px;
+}
+
+#bodyForm h2 {
     margin-top: 40px;
+    margin-right: auto;
+    margin-left: auto;
     font-weight: 700;
     font-size: 24px;
     line-height: 33px;
-    display: flex;
     align-items: center;
     color: #333333;
+    display: block;
+    width: 1186px;
 }
 
 table {
     width: 1186px !important;
-    margin: 26px 90px 0px 90px !important;
+    margin-top: 26px !important;
 }
 
 tbody {
@@ -327,6 +333,7 @@ button svg {
 
 .simple-btn.underlined {
     text-decoration: underline;
+    text-decoration-skip-ink: none;
 }
 
 .simple-btn.bolded {
@@ -334,6 +341,11 @@ button svg {
 }
 
 /* Модальные окна */
+
+#clientModal {
+    z-index: 2000;
+}
+
 .modal-content {
     padding: 24px 30px 25px 30px;
     border-radius: 0px;
@@ -399,7 +411,7 @@ input.form-control {
     margin-top: 0px;
 }
 
-#errorsBlock {
+#errorsBlock, #errorDeleteBlock {
     display: none;
     margin: 8px auto 9px auto;
     text-align: center;
@@ -408,6 +420,94 @@ input.form-control {
     width: 338px;
 }
 
+#errorDeleteBlock {
+    margin: 4px auto 5px auto;
+}
+
+#deleteClientModal .modal-footer.haveErrors #errorDeleteBlock{
+    display: block;
+}
+
+#deleteClientModal .modal-footer.haveErrors #deleteClientButton{
+    margin-top: 0px;
+}
+
 .not-validate {
     border-bottom: 1px solid rgba(240, 106, 77, 1) !important;
 }
+
+#errorGridBlock {
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Spinner */
+#spinnerTableBlock, #spinnerClientModalBlock {
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgb(0 0 0 / 22%);
+}
+
+#spinnerTableBlock {
+    width: 1186px !important;
+    left: 50% !important;
+    margin-top: 43px;
+    z-index: 1000;
+}
+
+@media screen and (min-width: 1400px) {
+    #spinnerTableBlock {
+        margin-left: -556px !important;
+    }
+}
+
+@media screen and (min-width: 1200px) and (max-width: 1400px) {
+    #spinnerTableBlock {
+        margin-left: -534px !important;
+    }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1200px) {
+    #spinnerTableBlock {
+        margin-left: -443px !important;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    #spinnerTableBlock {
+        margin-left: -316px;
+    }
+}
+
+#spinnerClientModalBlock {
+    z-index: 3000;
+    margin: -24px -30px;
+}
+
+#spinner.rotating {
+    animation: 1s linear 0s normal none infinite running rotating;
+    -webkit-animation: 1s linear 0s normal none infinite running rotating;
+    width: 100px;
+    margin-top: 100px;
+}
+
+@keyframes rotating {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes rotating {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+}
+/* */

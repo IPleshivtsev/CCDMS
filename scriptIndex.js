@@ -1,4 +1,5 @@
 (function script() {
+    let timerId;
     let plannedDeleteClientId = '';
     let filter = {
         searchString: '',
@@ -28,7 +29,119 @@
     let addContactButton
     let contactElement;
     let errorsBlock;
+    let clientModalCancelButton;
+    let deleteClientModalCancelButton;
+    let deleteClientFromModalButton;
+    let modalDeleteClientFooter;
     let hasErrors = false;
+
+    /* API */
+    let unknownErrorMsg = 'Что-то пошло не так...';
+    let invalidArgumentDataErrorMsg = 'Некорректные данные в аргументе';
+    let clientNotFoundErrorMsg = 'Клиент с таким ID не найден';
+
+    async function getClients() {
+        try {
+            const responce = await fetch(`http://localhost:3000/api/clients`);
+            return await responce.json();
+        }
+        catch (exp) {
+            return exp;
+        }
+    }
+
+    async function deleteClient(id) {
+        try {
+            const responce = await fetch(`http://localhost:3000/api/clients/${id}`, {
+                method: 'DELETE',
+            });
+
+            if(responce.ok) {
+                return { isOkResult: true, result: '' };
+            } else {
+                return { isOkResult: false, result: unknownErrorMsg };
+            }
+        } catch (exp) {
+            return { isOkResult: false, result: unknownErrorMsg };
+        }
+    }
+
+    async function saveOrUpdateClient() {
+        try {
+            let responce;
+            if (clientModel.id !== '') {
+                responce = await fetch(`http://localhost:3000/api/clients/${clientModel.id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify(clientModel)
+                });            
+            } else {
+                responce = await fetch(`http://localhost:3000/api/clients`, {
+                    method: 'POST',
+                    body: JSON.stringify(clientModel)
+                });
+            }
+
+            if (responce.ok) {
+                return { isOkResult: true, result: await responce.json() };
+            } else {
+                let errorMsg;
+                if (responce.status === 422) {
+                    errorMsg = invalidArgumentDataErrorMsg;
+                } else if (responce.status === 404 && responce.statusText !== 'Not Found') {
+                    errorMsg = clientNotFoundErrorMsg;
+                } else {
+                    errorMsg = unknownErrorMsg;
+                }
+                return { isOkResult: false, result: errorMsg };
+            }
+        } catch (exp) {
+            return { isOkResult: false, result: unknownErrorMsg };
+        }
+    }
+    /* */
+
+    function switchSpinner(spinner, isSwitchOn) {
+        document.querySelector("#spinnerTableBlock").style.height = `${clientsTable.clientHeight - 24}px`;
+        if ((isSwitchOn && spinner.classList.contains('hide'))
+         || (!isSwitchOn && !spinner.classList.contains('hide'))) {
+                spinner.classList.toggle('hide');
+        }
+    }
+
+    function compareContacts(newContacts, oldContacts) {        
+        if (newContacts.length !== oldContacts.length) {
+            return false;
+        }
+
+        for (let i = 0; i < newContacts.length; i++) {
+            if (newContacts[i].type !== oldContacts[i].type 
+                || newContacts[i].value !== oldContacts[i].value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    function compareClientModelWithSaved(newModel) {
+        let savedModel = clients.filter(x => x.id === newModel.id)[0];
+        
+        if(newModel.name !== savedModel.name 
+            || newModel.surname !== savedModel.surname
+            || newModel.lastName !== savedModel.lastName
+            || !compareContacts(newModel.contacts, savedModel.contacts)) {
+            return false;
+        }
+        return true;                
+    }
+
+    function addClientContact(contactType='Телефон', contactValue='') {
+        contactElement = contactElements_clientModal.filter(x => x.classList.contains('hide'))[0];
+        contactElement.querySelector('.contactType').innerText = contactType;
+        contactElement.querySelector('input').value = contactValue;
+        contactElement.classList.toggle('hide');
+        contactElementsBlock_clientModal.appendChild(contactElement);
+        checkAddContactBtn();
+    }
 
     function removeValidateError(input) {
         if(input.classList.contains('not-validate'))
@@ -148,7 +261,8 @@
     }
 
     async function checkAndSaveClient() {
-        let modalFooter = document.querySelector('.modal-footer');
+        switchSpinner(document.querySelector('#spinnerClientModalBlock'), true);
+        let modalFooter = document.querySelector('#clientModal .modal-footer');
         validateClientModal();
         
         if (!hasErrors) {
@@ -172,21 +286,32 @@
                 });
             }
 
-            let resultData = await saveOrUpdateClient();
-            if (resultData.isOkResult) {
-                clients.push(resultData.result);
-                fillClients(clients);
-                document.querySelector('#clientModal').classList.toggle('show');
-                document.querySelector('.modal-backdrop').classList.toggle('show');
-                document.querySelector('#cancelButton').click();
+            let resultData;
+            if (clientModel.id === '' || (clientModel.id !== '' && !compareClientModelWithSaved(clientModel))) {
+                resultData = await saveOrUpdateClient();
             } else {
-                //Вывести сообщение об ошибке
+                clientModalCancelButton.click();
             }
-        } else {            
+            
+            if (resultData !== null) {
+                if (resultData.isOkResult) {
+                    clients = clients.filter(x => x.id !== resultData.result.id);
+                    clients.push(resultData.result);
+                    fillClients(clients);
+                    clientModalCancelButton.click();
+                } else {
+                    errorsBlock.innerHTML = resultData.result;
+                    if (!modalFooter.classList.contains('haveErrors')) {
+                        modalFooter.classList.toggle('haveErrors');
+                    }
+                }
+            }
+        } else {
             if (!modalFooter.classList.contains('haveErrors')) {
                 modalFooter.classList.toggle('haveErrors');
             }
         }
+        switchSpinner(document.querySelector('#spinnerClientModalBlock'), false);
     }
 
     function clearClientModal() {
@@ -196,7 +321,13 @@
         removeValidateError(patronymic_clientModal);
         secondName_clientModal.value = '';
         firstName_clientModal.value = '';
-        patronymic_clientModal.value = '';        
+        patronymic_clientModal.value = '';
+        if (!deleteClientFromModalButton.classList.contains('hide')) {
+            deleteClientFromModalButton.classList.toggle('hide');
+        }
+        if (clientModalCancelButton.classList.toggle('hide')) {
+            clientModalCancelButton.classList.toggle('hide');
+        }
 
         let activeContactElements = contactElements_clientModal.filter(x => !x.classList.contains('hide'));
 
@@ -284,13 +415,28 @@
         if (name === 'deleteClientButton') {
             button.addEventListener('click', function(e) {
                 plannedDeleteClientId = e.currentTarget.closest('tr').querySelector('td[name="id"]').innerText;
+                document.querySelector('#errorDeleteBlock').innerHTML = '';
+                if (modalDeleteClientFooter.classList.contains('haveErrors')) {
+                    modalDeleteClientFooter.classList.toggle('haveErrors');
+                }
             });
         } else if (name === 'editClientButton') {
             button.addEventListener('click', function(e) {
-                let clientId = e.currentTarget.closest('tr').querySelector('td[name="id"]').innerText;
-                clientModalLabel.innerHTML = `<b>Изменить данные </b><span>ID: ${clientId}</span>`;
-                clientModalLabel.setAttribute('clientId', clientId);
                 clearClientModal();
+                let currentClient = e.currentTarget.closest('tr');
+                let currentClientModel = clients.filter(x => x.id === currentClient.querySelector('td[name="id"]').innerText)[0];
+                clientModalLabel.innerHTML = `<b>Изменить данные </b><span>ID: ${currentClientModel.id}</span>`;
+                clientModalLabel.setAttribute('clientId', currentClientModel.id);
+                deleteClientFromModalButton.classList.toggle('hide');
+                clientModalCancelButton.classList.toggle('hide');
+                
+                secondName_clientModal.value = currentClientModel.surname;
+                firstName_clientModal.value = currentClientModel.name;
+                patronymic_clientModal.value = currentClientModel.lastName;
+
+                for (let clientContact of currentClientModel.contacts) {
+                    addClientContact(clientContact.type, clientContact.value);
+                }
             })
         }
         img = document.createElement('img');
@@ -383,40 +529,14 @@
     }
 
     function fillClients(clients) {
+        switchSpinner(document.querySelector('#spinnerTableBlock'), true);
         clientsTable.querySelector('tBody').innerHTML = '';
         for (const client of clients) {
             addClientToTable(client);
         }
         initializeTooltips();
+        switchSpinner(document.querySelector('#spinnerTableBlock'), false);
     }
-
-    /* API */
-    async function getClients() {
-        const responce = await fetch(`http://localhost:3000/api/clients`);
-        return await responce.json();
-    }
-
-    async function deleteClient(id) {
-        const responce = await fetch(`http://localhost:3000/api/clients/${id}`, {
-            method: 'DELETE',
-        });
-        return responce.ok;
-        // Сделать обработку ответа
-    }
-
-    async function saveOrUpdateClient() {
-        const responce = await fetch(`http://localhost:3000/api/clients`, {
-            method: 'POST',
-            body: JSON.stringify(clientModel)
-        });
-
-        if (responce.ok) {
-            return { isOkResult: true, result: await responce.json() };
-        } else {
-            return { isOkResult: false, result: responce.status }
-        }
-    }
-    /* */
 
     function initializeTooltips() {
         var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
@@ -461,23 +581,31 @@
             });
         }        
     }
+
     
     async function initialization() {
         clientsTable = document.querySelector('#clientsTable');
         clientModalLabel = document.querySelector('#clientModalLabel');
         errorsBlock = document.querySelector('#errorsBlock');
+        modalDeleteClientFooter = document.querySelector('#deleteClientModal .modal-footer');
                 
         clients = await getClients();
-        if (clients.length !== 0) {
+        if (clients.length > 0) {
           fillClients(clients);          
         } else {
-          //"Клиенты отсутствуют";
+            document.querySelector('#errorGridBlock').innerHTML = 'Клиенты отсутствуют';
         }
         initializeSort();
 
-        document.querySelector('#searchInput').addEventListener('input', function(e) {
-            filter.searchString = e.currentTarget.value.toLowerCase();
-            applyFilter();
+        document.querySelector('#searchInput').addEventListener('input', function() {            
+            if (timerId !== undefined) {
+                clearTimeout(timerId);
+              }
+          
+              timerId = setTimeout(function() {
+                  filter.searchString = document.querySelector('#searchInput').value.toLowerCase();
+                  applyFilter();
+              }, 300);
         })
 
         let dropdownItems = document.querySelectorAll('a.dropdown-item');
@@ -510,12 +638,7 @@
         });
 
         addContactButton = document.querySelector('#addContactButton');
-        addContactButton.addEventListener('click', function(e) {
-            contactElement = contactElements_clientModal.filter(x => x.classList.contains('hide'))[0];
-            contactElement.classList.toggle('hide');
-            contactElementsBlock_clientModal.appendChild(contactElement);
-            checkAddContactBtn();
-        });
+        addContactButton.addEventListener('click', function(e) {addClientContact()});
 
         let deleteContactBtns = document.querySelectorAll('.deleteContactBtn');
 
@@ -525,28 +648,42 @@
                 contactElement.classList.toggle('hide');
                 contactElement.querySelector('.contactType').innerText = 'Телефон';
                 contactElement.querySelector('input').value = '';
-                checkAddContactBtn();               
+                checkAddContactBtn();
             });
         }
 
         document.querySelector('#saveClientButton').addEventListener('click', checkAndSaveClient);
 
-        let cancelModalBtns = document.querySelectorAll('#cancelButton');
-
-        for (let cancelModalBtn of cancelModalBtns) {
-            cancelModalBtn.addEventListener('click', function(e) {
-                plannedDeleteClientId = '';
-            });
-        }
-
         document.querySelector('#deleteClientButton').addEventListener('click', async function (e) {
             if (plannedDeleteClientId !== '') {
-                let ret = await deleteClient(plannedDeleteClientId);
-                if (ret) {
+                let resultData = await deleteClient(plannedDeleteClientId);
+                if (resultData.isOkResult) {
+                    if (modalDeleteClientFooter.classList.contains('haveErrors')) {
+                        modalDeleteClientFooter.classList.toggle('haveErrors');
+                    }
                     clients = clients.filter( c => c.id !== plannedDeleteClientId );
                     fillClients(clients);
+                    deleteClientModalCancelButton.click();
+                } else {
+                    document.querySelector('#errorDeleteBlock').innerHTML = resultData.result;                    
+                    if (!modalDeleteClientFooter.classList.contains('haveErrors')) {
+                        modalDeleteClientFooter.classList.toggle('haveErrors');
+                    }
                 }
             }
+        });
+
+        clientModalCancelButton = document.querySelector('#clientModal #cancelButton');
+        clientModalCancelButton.addEventListener('click', function(e) {
+            plannedDeleteClientId = '';
+        });
+        deleteClientModalCancelButton = document.querySelector('#deleteClientModal #cancelButton');
+        deleteClientModalCancelButton.addEventListener('click', function(e) {
+            plannedDeleteClientId = '';
+        });
+        deleteClientFromModalButton = document.querySelector('#deleteClientFromModalButton');
+        deleteClientFromModalButton.addEventListener('click', async function (e) {
+            plannedDeleteClientId = clientModalLabel.getAttribute('clientId');
         });
     }
 
