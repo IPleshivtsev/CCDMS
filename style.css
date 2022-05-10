@@ -46,6 +46,8 @@ body {
     width: 1186px;
 }
 
+
+/* Таблица */
 table {
     width: 1186px !important;
     margin-top: 26px !important;
@@ -106,25 +108,6 @@ button svg {
     vertical-align: bottom;
 }
 
-#addClientButton {
-    align-items: center;
-    width: 216px;
-    display: flex;
-    flex-direction: row;
-    margin-top: 40px;
-}
-
-#saveClientButton, #deleteClientButton {
-    align-items: center;
-    width: 147px;
-    flex-direction: row;
-    margin-top: 25px;
-}
-
-#saveClientButton, #cancelButton, #editClientButton, #deleteClientButton {
-    cursor: pointer;
-}
-
 .sort {
     color: #9873FF;
 }
@@ -147,108 +130,8 @@ button svg {
     vertical-align: middle;
 }
 
-/* Contact form */
 
-#addContactsBlock {
-    margin: 0px -30px;
-    padding: 25px 0px;
-    background-color: rgba(200, 197, 209, 0.2);
-    text-align: center;
-}
-
-.contactElement {
-    width: 438px;
-    margin: 0px 30px;
-}
-
-.hide {
-    display: none;
-}
-
-.contactElement button.dropdownContactBtn,
-.contactElement button.dropdownContactBtn.show {
-    background-color: #E7E5EB;
-    border-radius: 0px;
-    width: 145px;
-    text-align: left;
-}
-
-.contactElement button.dropdownContactBtn::after {
-    display: none;
-}
-
-.contactElement button.dropdownContactBtn span {
-    float: left;
-}
-
-.contactElement button.dropdownContactBtn svg {
-    width: 11px;
-    height: 24px;
-    float: right;
-}
-
-.contactElement button.dropdownContactBtn.show svg {
-    transform: rotate(180deg);
-}
-
-.contactElement button.deleteContactBtn {
-    background-color: #E7E5EB;
-    border: 1px solid #C8C5D1;
-    border-radius: 0px;
-    padding: 0px 6px;
-}
-
-.contactElement button.dropdownContactBtn,
-.contactElement button.dropdownContactBtn:focus {
-    color: #333333 !important;    
-    border: 1px solid #C8C5D1;
-}
-
-.contactElement button:hover,
-.contactElement button.dropdownContactBtn:focus {
-    background-color: #E7E5EB;
-}
-
-.contactElement button.dropdownContactBtn.show:focus {
-    border: 1px solid #C8C5D1;
-}
-
-.contactElement button.deleteContactBtn svg{
-    vertical-align: baseline;
-    fill: #B0B0B0;
-}
-
-.contactElement button.deleteContactBtn:hover {
-    border: 1px solid #F06A4D;
-}
-
-.contactElement button:focus,
-.contactElement button.dropdownContactBtn.show:focus {
-    box-shadow: 0 0 0 0 !important;
-}
-
-.contactElement button.deleteContactBtn:hover svg {
-    fill: #F06A4D;
-}
-
-.contactElement ul {
-    background-color: #F4F3F6;
-    padding: 0;
-    min-width: 145px;
-    transform: translate3d(0px, 38px, 0px) !important;
-    border-radius: 0px;
-}
-
-.contactElement ul li {
-    background-color: #F4F3F6;
-    cursor: pointer;
-}
-
-.contactElement ul li:hover {
-    background-color: #E7E5EB;
-}
-
-/* Buttons */
+/* Кнопки */
 .primary-btn, .secondary-btn {
     height: 44px;
     padding: 12.5px 26.5px;
@@ -340,8 +223,35 @@ button svg {
     font-weight: 600;
 }
 
-/* Модальные окна */
+#addClientButton {
+    align-items: center;
+    width: 216px;
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+}
 
+#saveClientButton, #deleteClientButton {
+    align-items: center;
+    width: 147px;
+    flex-direction: row;
+    margin-top: 25px;
+}
+
+#saveClientButton, #cancelButton, #editClientButton, #deleteClientButton {
+    cursor: pointer;
+}
+
+.modal-footer.haveErrors #saveClientButton {
+    margin-top: 0px;
+}
+
+#deleteClientModal .modal-footer.haveErrors #deleteClientButton{
+    margin-top: 0px;
+}
+
+
+/* Модальные окна */
 #clientModal {
     z-index: 2000;
 }
@@ -378,6 +288,11 @@ input.form-control {
     color: rgba(176, 176, 176, 1);
 }
 
+#deleteClientModalLabel {
+    text-align: center;
+    width: 100%;
+}
+
 .modal-body .form-floating input.form-control {
     padding: 0px;
     height: 40px;
@@ -399,16 +314,16 @@ input.form-control {
     transform-origin: 0 -80px;
 }
 
+#deleteClientModal .modal-body {
+    text-align: center;
+}
+
 .modal-footer {
     display: contents;
 }
 
 .modal-footer.haveErrors #errorsBlock {
     display: block;
-}
-
-.modal-footer.haveErrors #saveClientButton {
-    margin-top: 0px;
 }
 
 #errorsBlock, #errorDeleteBlock {
@@ -428,10 +343,6 @@ input.form-control {
     display: block;
 }
 
-#deleteClientModal .modal-footer.haveErrors #deleteClientButton{
-    margin-top: 0px;
-}
-
 .not-validate {
     border-bottom: 1px solid rgba(240, 106, 77, 1) !important;
 }
@@ -441,7 +352,104 @@ input.form-control {
     text-align: center;
 }
 
-/* Spinner */
+/* Блок с контактами в модальном окне */
+#addContactsBlock {
+    margin: 0px -30px;
+    padding: 25px 0px;
+    background-color: rgba(200, 197, 209, 0.2);
+    text-align: center;
+}
+
+.contactElement {
+    width: 438px;
+    margin: 0px 30px;
+}
+
+.contactElement button.dropdownContactBtn,
+.contactElement button.dropdownContactBtn.show {
+    background-color: #E7E5EB;
+    border-radius: 0px;
+    width: 145px;
+    text-align: left;
+}
+
+.contactElement button.dropdownContactBtn::after {
+    display: none;
+}
+
+.contactElement button.dropdownContactBtn span {
+    float: left;
+}
+
+.contactElement button.dropdownContactBtn svg {
+    width: 11px;
+    height: 24px;
+    float: right;
+}
+
+.contactElement button.dropdownContactBtn.show svg {
+    transform: rotate(180deg);
+}
+
+.contactElement button.deleteContactBtn {
+    background-color: #E7E5EB;
+    border: 1px solid #C8C5D1;
+    border-radius: 0px;
+    padding: 0px 6px;
+}
+
+.contactElement button.dropdownContactBtn,
+.contactElement button.dropdownContactBtn:focus {
+    color: #333333 !important;    
+    border: 1px solid #C8C5D1;
+}
+
+.contactElement button:hover,
+.contactElement button.dropdownContactBtn:focus {
+    background-color: #E7E5EB;
+}
+
+.contactElement button.dropdownContactBtn.show:focus {
+    border: 1px solid #C8C5D1;
+}
+
+.contactElement button.deleteContactBtn svg{
+    vertical-align: baseline;
+    fill: #B0B0B0;
+}
+
+.contactElement button.deleteContactBtn:hover {
+    border: 1px solid #F06A4D;
+}
+
+.contactElement button:focus,
+.contactElement button.dropdownContactBtn.show:focus {
+    box-shadow: 0 0 0 0 !important;
+}
+
+.contactElement button.deleteContactBtn:hover svg {
+    fill: #F06A4D;
+}
+
+.contactElement ul {
+    background-color: #F4F3F6;
+    padding: 0;
+    min-width: 145px;
+    transform: translate3d(0px, 38px, 0px) !important;
+    border-radius: 0px;
+}
+
+.contactElement ul li {
+    background-color: #F4F3F6;
+    cursor: pointer;
+}
+
+.contactElement ul li:hover {
+    background-color: #E7E5EB;
+}
+
+
+/* Индикатор загрузки */
 #spinnerTableBlock, #spinnerClientModalBlock {
     text-align: center;
     width: 100%;
@@ -510,4 +518,3 @@ input.form-control {
       transform: rotate(360deg);
     }
 }
-/* */
