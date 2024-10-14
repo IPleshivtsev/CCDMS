@@ -15,11 +15,7 @@
   let plannedDeleteClientId = '';  
   let clients;
   let clientsTable;
-  let tr;
   let td;
-  let button;
-  let img;
-  let ths;
   let clientModalLabel;
   let secondNameClientModal;
   let firstNameClientModal;
@@ -27,7 +23,6 @@
   let contactElementsBlockClientModal;
   let contactElementsClientModal;
   let addContactButton;
-  let contactElement;
   let errorsBlock;
   let clientModalCancelButton;
   let deleteClientModalCancelButton;
@@ -36,6 +31,7 @@
   let hasErrors = false;
 
   /* Функции обращения к методам API */
+  // Тексты ошибок при обращении к методам API
   const unknownErrorMsg = 'Что-то пошло не так...';
   const invalidArgumentDataErrorMsg = 'Некорректные данные в аргументе';
   const clientNotFoundErrorMsg = 'Клиент с таким ID не найден';
@@ -60,6 +56,7 @@
       if (responce.ok) {
         return { isOkResult: true, result: '' };
       }
+
       return { isOkResult: false, result: unknownErrorMsg };
     } catch (exp) {
       return { isOkResult: false, result: unknownErrorMsg };
@@ -85,7 +82,9 @@
       if (responce.ok) {
         return { isOkResult: true, result: await responce.json() };
       }
+
       let errorMsg;
+
       if (responce.status === 422) {
         errorMsg = invalidArgumentDataErrorMsg;
       } else if (responce.status === 404 && responce.statusText !== 'Not Found') {
@@ -93,6 +92,7 @@
       } else {
         errorMsg = unknownErrorMsg;
       }
+
       return { isOkResult: false, result: errorMsg };
     } catch (exp) {
       return { isOkResult: false, result: unknownErrorMsg };
@@ -114,7 +114,7 @@
   /* Функции таблицы */
   // Создание элемента с иконкой конкретного контакта
   function createContactIcon(src, type, value = '') {
-    img = document.createElement('img');
+    const img = document.createElement('img');
     img.src = src;
 
     if (type === 'count') {
@@ -136,15 +136,18 @@
 
   // Создание кнопки с изображением
   function createButtonWithImage(name, src, innerHTML, attributes) {
-    button = document.createElement('button');
+    const button = document.createElement('button');
     button.name = name;
+
     attributes.forEach((attribute) => {
       button.setAttribute(attribute.name, attribute.value);
     });
+
     if (name === 'deleteClientButton') {
       button.addEventListener('click', (e) => {
         plannedDeleteClientId = e.currentTarget.closest('tr').querySelector('td[name="id"]').innerText;
         document.querySelector('#errorDeleteBlock').innerHTML = '';
+        
         if (modalDeleteClientFooter.classList.contains('haveErrors')) {
           modalDeleteClientFooter.classList.toggle('haveErrors');
         }
@@ -154,7 +157,8 @@
         openClientModalOnEdit(e.currentTarget.closest('tr'));
       });
     }
-    img = document.createElement('img');
+
+    const img = document.createElement('img');
     img.src = src;
     button.append(img);
     button.innerHTML += innerHTML;
@@ -182,6 +186,7 @@
           break;
       }
     });
+
     const contactElements = tdElem.querySelectorAll('img');
     const contactBlock1 = document.createElement('div');
     contactBlock1.id = 'contactBlock_1';
@@ -205,12 +210,14 @@
           contactBlock2.innerHTML += '\n';
         }
       });
+
       tdElem.append(contactBlock1, createContactIcon(`./content/contacts/plus${contactElements.length - 4}.svg`, 'count'), contactBlock2);
     } else {
       contactElements.forEach((contactElem) => {
         contactBlock1.append(contactElem);
         contactBlock1.innerHTML += '\n';
       });
+
       tdElem.append(contactBlock1);
     }
     return tdElem;
@@ -236,7 +243,7 @@
 
   // Добавление клиента в таблицу
   function addClientToTable(client) {
-    tr = document.createElement('tr');
+    const tr = document.createElement('tr');
     tr.append(createTd('id', client.id));
     tr.append(createTd('fio', `${client.surname} ${client.name} ${client.lastName}`));
     tr.append(createTd('createdDatetime', `${new Date(client.createdAt).toLocaleDateString()} <p>${new Date(client.createdAt).toLocaleTimeString([], { timeStyle: 'short' })}</p>`));
@@ -266,11 +273,13 @@
 
   // Инициализация сортировки таблицы
   function initializeSort() {
-    ths = document.querySelectorAll('th[isSort="true"');
+    const ths = document.querySelectorAll('th[isSort="true"');
     ths.forEach((th) => {
       th.addEventListener('click', (e) => {
+
         let sortType;
         const imgEl = e.currentTarget.querySelectorAll('img');
+
         if (imgEl.length > 1) {
           if (e.currentTarget.querySelector('img.sortFio') === null) {
             sortType = '';
@@ -289,6 +298,7 @@
             imgElem.className = 'sortHide';
           });
         });
+
         e.currentTarget.className = 'sort';
         sortType = sortType === 'sortAsc' ? 'sortDesc' : 'sortAsc';
         filter.sortType = sortType === 'sortAsc' ? 'desc' : 'asc';
@@ -308,6 +318,7 @@
   // Применение фильтра
   function applyFilter() {
     const isAsc = filter.sortType === 'asc';
+
     switch (filter.column) {
       case 'id':
       case 'createdDatetime':
@@ -369,9 +380,11 @@
     secondNameClientModal.value = '';
     firstNameClientModal.value = '';
     patronymicClientModal.value = '';
+
     if (!deleteClientFromModalButton.classList.contains('hide')) {
       deleteClientFromModalButton.classList.toggle('hide');
     }
+
     if (clientModalCancelButton.classList.toggle('hide')) {
       clientModalCancelButton.classList.toggle('hide');
     }
@@ -382,6 +395,7 @@
       activeContactElement.querySelector('input').value = '';
       removeValidateError(activeContactElement.querySelector('input'));
     });
+
     checkAddContactBtn();
   }
 
@@ -456,7 +470,7 @@
 
   // Добавление контакта в блок "Контакты" модального окна добавления/редактирования клиента
   function addClientContact(contactType = 'Телефон', contactValue = '') {
-    contactElement = contactElementsClientModal.filter((x) => x.classList.contains('hide'))[0];
+    const contactElement = contactElementsClientModal.filter((x) => x.classList.contains('hide'))[0];
     contactElement.querySelector('.contactType').innerText = contactType;
     contactElement.querySelector('input').value = contactValue;
     contactElement.classList.toggle('hide');
@@ -475,15 +489,18 @@
   function addValidateError(errorMsg, errorInput) {
     errorsBlock.innerHTML += errorsBlock.innerHTML === '' || errorMsg === ''
       ? errorMsg : `<br/>${errorMsg}`;
+
     if (!errorInput.classList.contains('not-validate')) {
       errorInput.classList.toggle('not-validate');
     }
+
     hasErrors = true;
   }
 
   // Валидация значения контакта согласно его типу
   function validateContactElement(contactType, contactValue) {
     let result = true;
+
     switch (contactType) {
       case 'Телефон':
         result = /^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$/.test(contactValue);
@@ -525,6 +542,7 @@
     }
 
     const activeContactElements = contactElementsClientModal.filter((x) => !x.classList.contains('hide'));
+    
     if (activeContactElements.length > 0) {
       let isErrorMsgOfNullAdded = false;
       let isErrorMsgOfWrongPhoneAdded = false;
@@ -547,32 +565,38 @@
           activeContactElementType,
           activeContactElementInput.value,
         );
+
         if (activeContactElementInput.value === '') {
           isError = true;
+
           if (!isErrorMsgOfNullAdded) {
             errorMsg = 'Контакт не может быть пустым';
             isErrorMsgOfNullAdded = true;
           }
         } else if (activeContactElementType === 'Телефон' && !isContactElementValid) {
           isError = true;
+
           if (!isErrorMsgOfWrongPhoneAdded) {
             errorMsg = 'Контакт "Телефон" содержит некорректный номер';
             isErrorMsgOfWrongPhoneAdded = true;
           }
         } else if (activeContactElementType === 'Email' && !isContactElementValid) {
           isError = true;
+          
           if (!isErrorMsgOfWrongEmailAdded) {
             errorMsg = 'Контакт "Email" содержит некорректный адрес';
             isErrorMsgOfWrongEmailAdded = true;
           }
         } else if (activeContactElementType === 'Facebook' && !isContactElementValid) {
           isError = true;
+          
           if (!isErrorMsgOfWrongFacebookUrlAdded) {
             errorMsg = 'Контакт "Facebook" содержит некорректный адрес страницы';
             isErrorMsgOfWrongFacebookUrlAdded = true;
           }
         } else if (activeContactElementType === 'VK' && !isContactElementValid) {
           isError = true;
+
           if (!isErrorMsgOfWrongVKUrlAdded) {
             errorMsg = 'Контакт "VK" содержит некорректный адрес страницы';
             isErrorMsgOfWrongVKUrlAdded = true;
@@ -596,6 +620,7 @@
       if (modalFooter.classList.contains('haveErrors')) {
         modalFooter.classList.toggle('haveErrors');
       }
+
       clientModel = {
         id: clientModalLabel.getAttribute('clientId'),
         name: firstNameClientModal.value,
@@ -612,6 +637,7 @@
       });
 
       let resultData;
+
       if (clientModel.id === '' || (clientModel.id !== '' && !compareClientModelWithSaved(clientModel))) {
         resultData = await saveOrUpdateClientAPI();
       } else {
@@ -641,15 +667,18 @@
   async function deleteClient() {
     if (plannedDeleteClientId !== '') {
       const resultData = await deleteClientAPI(plannedDeleteClientId);
+
       if (resultData.isOkResult) {
         if (modalDeleteClientFooter.classList.contains('haveErrors')) {
           modalDeleteClientFooter.classList.toggle('haveErrors');
         }
+
         clients = clients.filter((c) => c.id !== plannedDeleteClientId);
         fillClients(clients);
         deleteClientModalCancelButton.click();
       } else {
         document.querySelector('#errorDeleteBlock').innerHTML = resultData.result;
+
         if (!modalDeleteClientFooter.classList.contains('haveErrors')) {
           modalDeleteClientFooter.classList.toggle('haveErrors');
         }
@@ -687,7 +716,9 @@
       clientModalLabel.setAttribute('clientId', '');
       clearClientModal();
     });
+
     document.querySelector('#searchInput').addEventListener('input', searchClient);
+
     document.querySelectorAll('a.dropdown-item').forEach((dropdownItem) => {
       dropdownItem.addEventListener('click', (e) => {
         const parentElement = e.currentTarget.closest('.contactElement');
@@ -698,11 +729,13 @@
     secondNameClientModal.addEventListener('input', (e) => { removeValidateError(e.currentTarget); });
     firstNameClientModal.addEventListener('input', (e) => { removeValidateError(e.currentTarget); });
     patronymicClientModal.addEventListener('input', (e) => { removeValidateError(e.currentTarget); });
+    
     contactElementsClientModal.forEach((contactElementClientModal) => {
       contactElementClientModal.querySelector('input').addEventListener('input', (e) => { removeValidateError(e.currentTarget); });
     });
 
     addContactButton.addEventListener('click', () => { addClientContact(); });
+    
     document.querySelectorAll('.deleteContactBtn').forEach((deleteContactBtn) => {
       deleteContactBtn.addEventListener('click', (e) => {
         deleteClientContact(e.currentTarget.parentElement);
